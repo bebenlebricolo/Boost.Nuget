@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>boost</id>
+        <version>VERSION</version>
+        <title>Boost repackaged</title>
+        <authors>AUTHOR</authors>
+        <language>en-US</language>
+        <projectUrl>https://www.boost.org/</projectUrl>
+        <license type="expression">BSL-1.0</license>
+        <iconUrl>http://www.boost.org/doc/libs/1_82_0/boost.png</iconUrl>
+        <description>Boost provides free peer-reviewed portable C++ source libraries.
+            We emphasize libraries that work well with the C++ Standard Library. Boost libraries
+            are intended to be widely useful, and usable across a broad spectrum of applications.
+            The Boost license encourages both commercial and non-commercial use.
+            We aim to establish 'existing practice' and provide reference implementations
+            so that Boost libraries are suitable for eventual standardization. Ten Boost
+            libraries are included in the C++ Standards Committee's Library Technical Report
+            (TR1) and in the new C++11 Standard. C++11 also includes several more Boost
+            libraries in addition to those from TR1. More Boost libraries are proposed for
+            standardization in C++17.
+            Since 2006 an intimate week long annual conference related to Boost called C++
+            Now has been held in Aspen, Colorado each May. Boost has been a participant in
+            the annual Google Summer of Code since 2007.</description>
+        <summary>Boost provides free peer-reviewed portable C++ source libraries.</summary>
+        <copyright>Copyright 2023</copyright>
+        <tags>Boost CoApp vc143 nativepackage</tags>
+        <readme>docs\README.md</readme>
+        <dependencies>
+            <dependency id="boost.redist" version="1.86.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="stage\lib\boost*mt-x64*.lib" target="build\native\lib\x64\Release\dynamic" />
+        <file src="stage\lib\boost*gd-x64*.lib" target="build\native\lib\x64\Debug\dynamic" />
+        <file src="boost\**" target="build\native\include\boost" />
+        <file src="boost.targets" target="build" />
+        <file src="README.md" target="docs\" />
+    </files>
+</package>

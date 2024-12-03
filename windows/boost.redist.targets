@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="_boost_vc143_redist_init;_boost_vc143_redist_init_2">
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-_boost_vc143_redist Condition="'$(Linkage-_boost_vc143_redist)' == ''">dynamic</Linkage-_boost_vc143_redist>
+    <CallingConvention-_boost_vc143_redist Condition="'$(CallingConvention-_boost_vc143_redist)' == ''">cdecl</CallingConvention-_boost_vc143_redist>
+  </PropertyGroup>
+  <Target Name="_boost_vc143_redist_init">
+    <_boost_vc143_redist_Contains Text="Linkage-dynamic" Library="_boost_vc143_redist" Value="dynamic" Condition="'$(Linkage-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="Linkage-static" Library="_boost_vc143_redist" Value="static" Condition="'$(Linkage-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="Linkage-ltcg" Library="_boost_vc143_redist" Value="ltcg" Condition="'$(Linkage-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="Linkage-sxs" Library="_boost_vc143_redist" Value="sxs" Condition="'$(Linkage-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="CallingConvention-cdecl" Library="_boost_vc143_redist" Value="cdecl" Condition="'$(CallingConvention-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="CallingConvention-stdcall" Library="_boost_vc143_redist" Value="stdcall" Condition="'$(CallingConvention-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="CallingConvention-fastcall" Library="_boost_vc143_redist" Value="fastcall" Condition="'$(CallingConvention-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="CallingConvention-thiscall" Library="_boost_vc143_redist" Value="thiscall" Condition="'$(CallingConvention-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+    <_boost_vc143_redist_Contains Text="CallingConvention-clrcall" Library="_boost_vc143_redist" Value="clrcall" Condition="'$(CallingConvention-_boost_vc143_redist)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-_boost_vc143_redist" />
+    </_boost_vc143_redist_Contains>
+  </Target>
+  <Target Name="_boost_vc143_redist_init_2">
+    <SetEnv Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'" Name="PATH" Prefix="true" Value="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="PATH" />
+    </SetEnv>
+    <SetEnv Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'" Name="PATH" Prefix="true" Value="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="PATH" />
+    </SetEnv>
+  </Target>
+  <ItemGroup Label="x64 and Release and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'">
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_atomic-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_chrono-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_date_time-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_filesystem-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_program_options-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_regex-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_serialization-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_system-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_thread-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_timer-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_wserialization-vc143-mt-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="x64 and Debug and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'">
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_atomic-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_chrono-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_date_time-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_filesystem-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_program_options-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_regex-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_serialization-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_system-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_thread-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_timer-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_wserialization-vc143-mt-gd-x64-1_82.dll" Condition="(('$(AppContainerApplication.ToLower())' == 'true')) OR (('$(TargetPlatformIdentifier.ToLower())' == 'windows phone' And '$(TargetPlatformVersion)' == '8.0'))">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <Target Name="_boost_vc143_redist_AfterBuild" AfterTargets="AfterBuild" />
+  <Target Name="_boost_vc143_redist_AfterBuild_x64_and_Release_and_dynamic" Label="x64 and Release and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'" AfterTargets="_boost_vc143_redist_AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_atomic-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_chrono-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_date_time-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_filesystem-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_program_options-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_regex-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_serialization-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_system-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_thread-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_timer-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Release/dynamic/boost_wserialization-vc143-mt-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="_boost_vc143_redist_AfterBuild_x64_and_Debug_and_dynamic" Label="x64 and Debug and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-_boost_vc143_redist.ToLower())' == 'dynamic'" AfterTargets="_boost_vc143_redist_AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_atomic-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_chrono-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_date_time-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_filesystem-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_program_options-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_regex-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_serialization-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_system-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_thread-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_timer-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../../build/native/bin/x64/Debug/dynamic/boost_wserialization-vc143-mt-gd-x64-1_82.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

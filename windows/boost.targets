@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="boost_init">
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-boost Condition="'$(Linkage-boost)' == ''">dynamic</Linkage-boost>
+    <CallingConvention-boost Condition="'$(CallingConvention-boost)' == ''">cdecl</CallingConvention-boost>
+  </PropertyGroup>
+  <ItemDefinitionGroup Label="x64 and Release and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-boost.ToLower())' == 'dynamic'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_wserialization-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_timer-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_thread-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_system-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_serialization-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_regex-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_program_options-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_filesystem-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_date_time-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_chrono-vc143-mt-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Release/dynamic/boost_atomic-vc143-mt-x64-1_82.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="x64 and Debug and dynamic" Condition="'$(Platform.ToLower())' == 'x64' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-boost.ToLower())' == 'dynamic'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_wserialization-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_timer-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_thread-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_system-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_serialization-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_regex-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_program_options-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_filesystem-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_date_time-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_chrono-vc143-mt-gd-x64-1_82.lib;$(MSBuildThisFileDirectory)../../build/native/lib/x64/Debug/dynamic/boost_atomic-vc143-mt-gd-x64-1_82.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <UsingTask TaskName="boost_Contains" AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <Text Output="false" ParameterType="System.String" />
+      <Library Output="false" Required="true" ParameterType="System.String" />
+      <Value Output="false" Required="true" ParameterType="System.String" />
+      <Result Output="true" ParameterType="System.String" />
+    </ParameterGroup>
+    <Task>
+      <Code>Result = ((Text ?? "").Split(';').Contains(Library) ) ? Value : String.Empty;</Code>
+    </Task>
+  </UsingTask>
+  <Target Name="boost_init">
+    <boost_Contains Text="Linkage-dynamic" Library="boost" Value="dynamic" Condition="'$(Linkage-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-boost" />
+    </boost_Contains>
+    <boost_Contains Text="Linkage-static" Library="boost" Value="static" Condition="'$(Linkage-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-boost" />
+    </boost_Contains>
+    <boost_Contains Text="Linkage-ltcg" Library="boost" Value="ltcg" Condition="'$(Linkage-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-boost" />
+    </boost_Contains>
+    <boost_Contains Text="Linkage-sxs" Library="boost" Value="sxs" Condition="'$(Linkage-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-boost" />
+    </boost_Contains>
+    <boost_Contains Text="CallingConvention-cdecl" Library="boost" Value="cdecl" Condition="'$(CallingConvention-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-boost" />
+    </boost_Contains>
+    <boost_Contains Text="CallingConvention-stdcall" Library="boost" Value="stdcall" Condition="'$(CallingConvention-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-boost" />
+    </boost_Contains>
+    <boost_Contains Text="CallingConvention-fastcall" Library="boost" Value="fastcall" Condition="'$(CallingConvention-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-boost" />
+    </boost_Contains>
+    <boost_Contains Text="CallingConvention-thiscall" Library="boost" Value="thiscall" Condition="'$(CallingConvention-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-boost" />
+    </boost_Contains>
+    <boost_Contains Text="CallingConvention-clrcall" Library="boost" Value="clrcall" Condition="'$(CallingConvention-boost)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-boost" />
+    </boost_Contains>
+  </Target>
+</Project>
