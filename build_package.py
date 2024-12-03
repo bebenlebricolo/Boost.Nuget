@@ -1,6 +1,7 @@
 #!/bin/python
 
 import argparse
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -9,6 +10,7 @@ from typing import Optional, cast
 import requests
 import regex
 import py7zr
+import multiprocessing
 
 VERSION_TAG = "VERSION"
 AUTHOR_TAG = "AUTHOR"
@@ -107,10 +109,6 @@ def find_b2_executable_in_folder(search_dir : Path) -> Optional[Path] :
 def build_boost_libraries(extracted_folder : Path, rebuild : bool = False) -> bool :
     print("Starting boost build system")
     boost_stage_dir = extracted_folder.joinpath("stage")
-    if boost_stage_dir.exists() and rebuild:
-        print("Cleaning previous build artifacts")
-        boost_stage_dir.rmdir()
-
     b2_executable = find_b2_executable_in_folder(extracted_folder)
     if b2_executable != None:
         print("Skipping bootstrapping task")
@@ -121,8 +119,33 @@ def build_boost_libraries(extracted_folder : Path, rebuild : bool = False) -> bo
             return False
         b2_executable = find_b2_executable_in_folder(extracted_folder)
 
+    build_jobs_count = (multiprocessing.cpu_count() - 2)
     b2_executable = cast(Path, b2_executable)
-    build_result = subprocess.run([b2_executable.name , "link=shared"],shell=True, cwd=extracted_folder)
+    options = [
+        f"-j{build_jobs_count}",
+        "link=shared",
+        "architecture=x86",
+        "address-model=64",
+        "threading=multi",
+        "runtime-link=shared",
+        "--build-type=minimal",
+        "stage",
+    ]
+
+    commands : list[str] = [b2_executable.name]
+    commands.extend(options)
+
+    if boost_stage_dir.exists():
+        print("Found pre-existing build artifacts")
+        if rebuild :
+            print("Rebuild flag was provided : will trigger full boost rebuild.")
+            commands.append("-a")
+            shutil.rmtree(boost_stage_dir, ignore_errors=True)
+        else :
+            print("Skipping build")
+            return True
+
+    build_result = subprocess.run(commands, shell=True, cwd=extracted_folder)
     if build_result.returncode != 0 :
         print("/!\\ Boost build failed.")
         return False
