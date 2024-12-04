@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>boost</id>
+        <id>boost.msvc.x64</id>
         <version>VERSION</version>
         <title>Boost repackaged</title>
         <authors>AUTHOR</authors>
@@ -24,17 +24,17 @@
             the annual Google Summer of Code since 2007.</description>
         <summary>Boost provides free peer-reviewed portable C++ source libraries.</summary>
         <copyright>Copyright 2023</copyright>
-        <tags>Boost CoApp vc143 nativepackage</tags>
+        <tags>Boost native</tags>
         <readme>docs\README.md</readme>
         <dependencies>
-            <dependency id="boost.redist" version="1.86.0" />
+            <dependency id="boost.msvc.x64.redist" version="VERSION" />
         </dependencies>
     </metadata>
     <files>
         <file src="stage\lib\boost*mt-x64*.lib" target="build\native\lib\x64\Release\dynamic" />
         <file src="stage\lib\boost*gd-x64*.lib" target="build\native\lib\x64\Debug\dynamic" />
         <file src="boost\**" target="build\native\include\boost" />
-        <file src="boost.targets" target="build" />
+        <file src="boost.msvc.x64.targets" target="build" />
         <file src="README.md" target="docs\" />
     </files>
 </package>

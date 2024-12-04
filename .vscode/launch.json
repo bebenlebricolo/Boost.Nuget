@@ -11,9 +11,10 @@
             "program": "${workspaceFolder}/build_package.py",
             "console": "integratedTerminal",
             "args": [
-                "-o", "package",
+                "-o", ".package",
                 "-r", "1.86.0",
-                "-a", "bebenlebricolo"
+                "-a", "bebenlebricolo",
+                "--rebuild"
             ]
         }
     ]
