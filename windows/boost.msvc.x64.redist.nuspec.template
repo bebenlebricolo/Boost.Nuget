@@ -27,10 +27,10 @@
         <tags>Boost native</tags>
     </metadata>
     <files>
-        <file src="stage\lib\*mt-x64*.dll" target="build\native\lib\x64\Release\dynamic" />
-        <file src="stage\lib\*gd-x64*.dll" target="build\native\lib\x64\Debug\dynamic" />
-        <file src="stage\lib\*mt-x64*.pdb" target="build\native\lib\x64\Release\dynamic" />
-        <file src="stage\lib\*gd-x64*.pdb" target="build\native\lib\x64\Debug\dynamic" />
+        <file src="stage\lib\*mt-x64*.dll" target="build\native\bin\x64\Release\dynamic" />
+        <file src="stage\lib\*gd-x64*.dll" target="build\native\bin\x64\Debug\dynamic" />
+        <file src="stage\lib\*mt-x64*.pdb" target="build\native\bin\x64\Release\dynamic" />
+        <file src="stage\lib\*gd-x64*.pdb" target="build\native\bin\x64\Debug\dynamic" />
         <file src="boost.msvc.x64.redist.targets" target="build" />
         <file src="README.md" target="docs\" />
     </files>
