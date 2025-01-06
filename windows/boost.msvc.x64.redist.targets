@@ -2,26 +2,40 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Default initializers for properties">
     <BoostRedistNugetRoot>$(MSBuildThisFileDirectory)..</BoostRedistNugetRoot>
+    <!-- Enables deployment of all *.dll and *.pdbs at once in the consumer's output $(TargetDir) -->
+    <BoostNugetDeployAll Condition="'$(BoostNugetDeployAll)' == ''">False</BoostNugetDeployAll>
   </PropertyGroup>
 
-  <ItemGroup Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
+  <ItemGroup Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug' And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
     <None Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Release/dynamic/*.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
-  <ItemGroup Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
+  <ItemGroup Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug' And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
     <None Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Debug/dynamic/*.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
 
   <!-- Binaries deployment -->
-  <Target Name="boost-redist-deploy" AfterTargets="AfterBuild" />
-  <Target Name="boost-redist-deploy-release" Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug'" AfterTargets="boost-redist-deploy">
-    <Copy SourceFiles="$(BoostRedistNugetRoot)/build/native/bin/x64/Release/dynamic/*.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  <Target Name="boost-redist-deploy" AfterTargets="AfterBuild" Condition="'$(BoostNugetDeployAll)' == 'True'" />
+  <Target Name="boost-redist-deploy-release" Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug' And '$(BoostNugetDeployAll)' == 'True'" AfterTargets="boost-redist-deploy">
+    <ItemGroup>
+      <_FilesToCopy Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Release/dynamic/*" />
+    </ItemGroup>
+    <Message Importance="high" Text="Copying *.dlls to output directory : @(_FilesToCopy)" />
+    <Copy SourceFiles="@(_FilesToCopy)"
+          DestinationFiles="@(_FilesToCopy-&gt;'$(TargetDir)%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Message Importance="high" Text="Copied *.dlls to output directory : $(TargetDir)" />
   </Target>
-  <Target Name="boost-redist-deploy-debug" Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug'" AfterTargets="boost-redist-deploy">
-    <Copy SourceFiles="$(BoostRedistNugetRoot)/build/native/bin/x64/Debug/dynamic/*.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+
+  <Target Name="boost-redist-deploy-debug" Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug' And '$(BoostNugetDeployAll)' == 'True'" AfterTargets="boost-redist-deploy">
+    <ItemGroup>
+      <_FilesToCopy Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Debug/dynamic/*" />
+    </ItemGroup>
+    <Message Importance="high" Text="Copying *.dlls and *.pdbs to output directory : @(_FilesToCopy)" />
+    <Copy SourceFiles="@(_FilesToCopy)"
+          DestinationFiles="@(_FilesToCopy-&gt;'$(TargetDir)%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>
