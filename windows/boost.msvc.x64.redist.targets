@@ -4,12 +4,12 @@
     <BoostRedistNugetRoot>$(MSBuildThisFileDirectory)..</BoostRedistNugetRoot>
   </PropertyGroup>
 
-  <ItemGroup Label="x64 and Release and dynamic" Condition="'$(Platform) == 'x64' And '$(Configuration)' != 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
+  <ItemGroup Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
     <None Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Release/dynamic/*.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
-  <ItemGroup Label="x64 and Debug and dynamic" Condition="''$(Platform) == 'x64' And '$(Configuration)' == 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
+  <ItemGroup Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug') And '$(Linkage-boost-redist.ToLower())' == 'dynamic'">
     <None Include="$(BoostRedistNugetRoot)/build/native/bin/x64/Debug/dynamic/*.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
@@ -17,10 +17,10 @@
 
   <!-- Binaries deployment -->
   <Target Name="boost-redist-deploy" AfterTargets="AfterBuild" />
-  <Target Name="boost-redist-deploy-release" Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And $(Configuration) != 'Debug'" AfterTargets="boost-redist-deploy">
+  <Target Name="boost-redist-deploy-release" Label="x64 and Release and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' != 'Debug'" AfterTargets="boost-redist-deploy">
     <Copy SourceFiles="$(BoostRedistNugetRoot)/build/native/bin/x64/Release/dynamic/*.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
   </Target>
-  <Target Name="boost-redist-deploy-debug" Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And $(Configuration) == 'Debug'" AfterTargets="boost-redist-deploy">
+  <Target Name="boost-redist-deploy-debug" Label="x64 and Debug and dynamic" Condition="'$(Platform)' == 'x64' And '$(Configuration)' == 'Debug'" AfterTargets="boost-redist-deploy">
     <Copy SourceFiles="$(BoostRedistNugetRoot)/build/native/bin/x64/Debug/dynamic/*.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
   </Target>
 
